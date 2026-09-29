@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Diet Plan - HealthNutri</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION BAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            HealthNutri 🥗
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/bmi">
+                BMI Calculator
+            </a>
+
+            <a href="/calories">
+                Calories
+            </a>
+
+            <a href="/diet">
+                Diet Plan
+            </a>
+
+            <a href="/recipes">
+                Recipes
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         DIET PLAN
+    ========================== -->
+
+    <div class="diet-container">
+
+        <h1>
+            Diet Plan
+        </h1>
+
+        <p>
+            Choose your goal and get a simple healthy diet plan
+        </p>
+
+
+        <div class="diet-card">
+
+
+            <!-- GOAL -->
+
+            <label for="goal">
+                Select Your Goal
+            </label>
+
+            <select id="goal">
+
+                <option value="">
+                    Select Goal
+                </option>
+
+                <option value="loss">
+                    📉 Weight Loss
+                </option>
+
+                <option value="maintenance">
+                    ⚖️ Maintenance
+                </option>
+
+                <option value="gain">
+                    📈 Weight Gain
+                </option>
+
+            </select>
+
+
+            <!-- BUTTONS -->
+
+            <button onclick="showDietPlan()">
+                Get Diet Plan
+            </button>
+
+            <button
+                onclick="resetDiet()"
+                class="reset-button">
+                Reset
+            </button>
+
+
+            <!-- RESULT -->
+
+            <div id="diet-result"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function showDietPlan() {
+
+            let goal =
+                document.getElementById("goal").value;
+
+            let result =
+                document.getElementById("diet-result");
+
+
+            /* =========================
+               VALIDATION
+            ========================== */
+
+            if (!goal) {
+
+                result.innerHTML =
+                    "<p class='error-message'>" +
+                    "Please select your goal." +
+                    "</p>";
+
+                return;
+            }
+
+
+            let plan = "";
+
+
+            /* =========================
+               WEIGHT LOSS
+            ========================== */
+
+            if (goal === "loss") {
+
+                plan = `
+
+                    <div class="diet-result-card">
+
+                        <h2>
+                            📉 Weight Loss Diet Plan
+                        </h2>
+
+                        <p class="diet-description">
+                            A balanced calorie-controlled diet
+                            focused on protein, vegetables,
+                            fiber and nutritious foods.
+                        </p>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌅 Breakfast
+                            </h3>
+
+                            <p>
+                                50g oats + 250ml milk +
+                                1 banana
+                            </p>
+
+                            <span>
+                                🔥 350 kcal |
+                                💪 15g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍎 Mid-Morning Snack
+                            </h3>
+
+                            <p>
+                                1 apple + 15g almonds
+                            </p>
+
+                            <span>
+                                🔥 170 kcal |
+                                💪 4g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍛 Lunch
+                            </h3>
+
+                            <p>
+                                2 roti + 150g dal +
+                                vegetables + 100g curd +
+                                salad
+                            </p>
+
+                            <span>
+                                🔥 500 kcal |
+                                💪 23g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                ☕ Evening Snack
+                            </h3>
+
+                            <p>
+                                30g roasted chana +
+                                green tea
+                            </p>
+
+                            <span>
+                                🔥 150 kcal |
+                                💪 6g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌙 Dinner
+                            </h3>
+
+                            <p>
+                                2 roti + 150g dal +
+                                vegetables + salad
+                            </p>
+
+                            <span>
+                                🔥 450 kcal |
+                                💪 20g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="nutrition-summary">
+
+                            <h3>
+                                📊 Daily Summary
+                            </h3>
+
+                            <p>
+                                🔥 Calories:
+                                <strong>
+                                    1620 kcal approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                💪 Protein:
+                                <strong>
+                                    68g approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                🥗 Focus:
+                                <strong>
+                                    High fiber & balanced nutrition
+                                </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+
+
+            /* =========================
+               MAINTENANCE
+            ========================== */
+
+            else if (goal === "maintenance") {
+
+                plan = `
+
+                    <div class="diet-result-card">
+
+                        <h2>
+                            ⚖️ Maintenance Diet Plan
+                        </h2>
+
+                        <p class="diet-description">
+                            A balanced diet designed to provide
+                            enough calories, protein and nutrients
+                            to maintain your current body weight.
+                        </p>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌅 Breakfast
+                            </h3>
+
+                            <p>
+                                60g oats + 300ml milk +
+                                1 banana + 15g peanut butter
+                            </p>
+
+                            <span>
+                                🔥 500 kcal |
+                                💪 19g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍎 Mid-Morning Snack
+                            </h3>
+
+                            <p>
+                                1 fruit + 20g almonds
+                            </p>
+
+                            <span>
+                                🔥 220 kcal |
+                                💪 6g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍛 Lunch
+                            </h3>
+
+                            <p>
+                                250g cooked rice + 150g dal +
+                                vegetables + 100g curd
+                            </p>
+
+                            <span>
+                                🔥 600 kcal |
+                                💪 22g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                ☕ Evening Snack
+                            </h3>
+
+                            <p>
+                                Whole wheat sandwich +
+                                1 fruit
+                            </p>
+
+                            <span>
+                                🔥 350 kcal |
+                                💪 14g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌙 Dinner
+                            </h3>
+
+                            <p>
+                                3 roti + dal/paneer/chicken +
+                                vegetables + salad
+                            </p>
+
+                            <span>
+                                🔥 600 kcal |
+                                💪 30g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="nutrition-summary">
+
+                            <h3>
+                                📊 Daily Summary
+                            </h3>
+
+                            <p>
+                                🔥 Calories:
+                                <strong>
+                                    2270 kcal approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                💪 Protein:
+                                <strong>
+                                    91g approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                🥗 Focus:
+                                <strong>
+                                    Balanced nutrition
+                                </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+
+
+            /* =========================
+               WEIGHT GAIN
+            ========================== */
+
+            else if (goal === "gain") {
+
+                plan = `
+
+                    <div class="diet-result-card">
+
+                        <h2>
+                            📈 Weight Gain Diet Plan
+                        </h2>
+
+                        <p class="diet-description">
+                            A calorie-surplus diet with
+                            protein-rich foods to support
+                            healthy weight gain and muscle growth.
+                        </p>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌅 Breakfast
+                            </h3>
+
+                            <p>
+                                80g oats + 300ml milk +
+                                1 banana + 30g peanut butter
+                            </p>
+
+                            <span>
+                                🔥 700 kcal |
+                                💪 27g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍌 Mid-Morning Snack
+                            </h3>
+
+                            <p>
+                                Banana shake +
+                                20g mixed nuts
+                            </p>
+
+                            <span>
+                                🔥 400 kcal |
+                                💪 12g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🍛 Lunch
+                            </h3>
+
+                            <p>
+                                300g cooked rice + 200g dal +
+                                vegetables + 100g paneer/chicken +
+                                curd
+                            </p>
+
+                            <span>
+                                🔥 750 kcal |
+                                💪 35g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🏋️ Pre/Post Workout
+                            </h3>
+
+                            <p>
+                                1 banana + 250ml milk +
+                                whey protein
+                            </p>
+
+                            <span>
+                                🔥 350 kcal |
+                                💪 30g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="meal-box">
+
+                            <h3>
+                                🌙 Dinner
+                            </h3>
+
+                            <p>
+                                300g cooked rice / 3 roti +
+                                dal + paneer/chicken +
+                                vegetables
+                            </p>
+
+                            <span>
+                                🔥 650 kcal |
+                                💪 30g protein
+                            </span>
+
+                        </div>
+
+
+                        <div class="nutrition-summary">
+
+                            <h3>
+                                📊 Daily Summary
+                            </h3>
+
+                            <p>
+                                🔥 Calories:
+                                <strong>
+                                    2850 kcal approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                💪 Protein:
+                                <strong>
+                                    134g approx.
+                                </strong>
+                            </p>
+
+                            <p>
+                                🏋️ Focus:
+                                <strong>
+                                    Calorie surplus & high protein
+                                </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+
+
+            /* =========================
+               DISPLAY PLAN
+            ========================== */
+
+            result.innerHTML = plan;
+
+        }
+
+
+        /* =========================
+           RESET
+        ========================== */
+
+        function resetDiet() {
+
+            document.getElementById("goal").value = "";
+
+            document.getElementById("diet-result").innerHTML = "";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
